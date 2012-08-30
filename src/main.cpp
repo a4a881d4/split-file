@@ -35,7 +35,7 @@ int main(int argc, char* argv[])
   long fl = ftell(fh);
   fseek(fh,0L,0);
   printf("{\n");
-  printf("\"file_length\"=%ld,\n",fl);
+  printf("\"filelength\"=%ld,\n\"blocksize\"=%d,\n",fl,bs);
   printf("\"block\"=[\n");
   long bn = fl/bs;
   long rest = fl%bs;
