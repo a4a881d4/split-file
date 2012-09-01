@@ -35,8 +35,8 @@ int main(int argc, char* argv[])
   long fl = ftell(fh);
   fseek(fh,0L,0);
   printf("{\n");
-  printf("\"filelength\"=%ld,\n\"blocksize\"=%d,\n",fl,bs);
-  printf("\"block\"=[\n");
+  printf("\"filelength\":%ld,\n\"blocksize\":%d,\n",fl,bs);
+  printf("\"block\":[\n");
   long bn = fl/bs;
   long rest = fl%bs;
   for (long i = 0; i < bn; i++ ) {
@@ -47,7 +47,7 @@ int main(int argc, char* argv[])
     FILE *fw = fopen(fwn.c_str(),"wb");
     fwrite(teststr,1,bs,fw);
     fclose(fw);
-    printf("%s,\n",hexstring);
+    printf("\"%s\",\n",hexstring);
   }
   fread(teststr,1,(int)rest,fh);
   sha1::calc(teststr,(int)rest, hash);
@@ -56,7 +56,7 @@ int main(int argc, char* argv[])
   FILE *fw = fopen(fwn.c_str(),"wb");
   fwrite(teststr,1,(int)rest,fw);
   fclose(fw);
-  printf("%s,\n]\n}\n",hexstring);
+  printf("\"%s\"\n]\n}\n",hexstring);
   fclose(fh);
   return (0);
 }
